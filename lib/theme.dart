@@ -21,9 +21,7 @@ class MyColors {
 
 ColorScheme myColorScheme = const ColorScheme(
   primary: MyColors.lightBlue,
-  primaryVariant: MyColors.darkBlue,
   secondary: MyColors.landing1,
-  secondaryVariant: MyColors.lightRed,
   surface: Colors.white,
   background: Colors.white,
   error: MyColors.lightRed,
@@ -38,14 +36,10 @@ ColorScheme myColorScheme = const ColorScheme(
 ThemeData _buildCustomTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-    colorScheme: myColorScheme,
-    toggleableActiveColor: MyColors.lightBlue,
-    accentColor: MyColors.lightRed,
+    hintColor: MyColors.lightRed,
     primaryColor: MyColors.lightBlue,
-    buttonColor: MyColors.lightBlue,
     scaffoldBackgroundColor: Colors.white,
     cardColor: Colors.white,
-    errorColor: MyColors.lightGreen,
     buttonTheme: ButtonThemeData(
       colorScheme: myColorScheme,
       textTheme: ButtonTextTheme.normal,
@@ -56,8 +50,30 @@ ThemeData _buildCustomTheme() {
 
     ),
     textTheme: _buildCustomTextTheme(base.textTheme),
-    primaryTextTheme: _buildCustomTextTheme(base.primaryTextTheme),
-    accentTextTheme: _buildCustomTextTheme(base.accentTextTheme),
+    primaryTextTheme: _buildCustomTextTheme(base.primaryTextTheme), colorScheme: myColorScheme.copyWith(error: MyColors.lightGreen), checkboxTheme: CheckboxThemeData(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return MyColors.lightBlue; }
+ return null;
+ }),
+ ), radioTheme: RadioThemeData(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return MyColors.lightBlue; }
+ return null;
+ }),
+ ), switchTheme: SwitchThemeData(
+ thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return MyColors.lightBlue; }
+ return null;
+ }),
+ trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return MyColors.lightBlue; }
+ return null;
+ }),
+ ),
   );
 }
 
