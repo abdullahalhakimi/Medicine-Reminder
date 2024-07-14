@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:medicine_reminder/entities/medicine.dart';
 /*
 Future<void> addDatabaseDumpData(medicineDao, reminderDao) async {
 

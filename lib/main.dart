@@ -17,7 +17,6 @@ import 'package:medicine_reminder/pages/medicineItemPage/medicineItemPage.dart';
 import 'package:medicine_reminder/pages/reminderAddPage/reminderAddPage.dart';
 import 'package:medicine_reminder/pages/splash/splash.dart';
 import 'package:medicine_reminder/theme.dart';
-import 'package:medicine_reminder/util/databaseTestUtil.dart';
 import 'package:medicine_reminder/util/notificationUtil.dart';
 import 'package:timezone/data/latest.dart' as tz;
 

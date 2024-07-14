@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medicine_reminder/pages/landing/components/customImage.dart';
 import 'package:medicine_reminder/pages/landing/components/nextButton.dart';
-import 'package:medicine_reminder/pages/landing/components/skipButton.dart';
 import 'package:medicine_reminder/pages/landing/components/textSection.dart';
 import 'package:medicine_reminder/theme.dart';
 
