@@ -44,6 +44,7 @@ Future onSelectNotification(payload) async {
   }
 }
 
+// the main function
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeNotifications();
