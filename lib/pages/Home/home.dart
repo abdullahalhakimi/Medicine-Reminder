@@ -251,9 +251,7 @@ Widget buildBottomSheet(BuildContext context) {
             label: Text(context.localizations!.linkedIn),
             icon: Image.asset('assets/linkedin.png'),
             onPressed: () {
-              const url =
-                  'https://www.linkedin.com/in/abdullah-al-hakimi-465025221';
-              _launchURL(url);
+              _launchURL('https://www.linkedin.com/in/abdullah-al-hakimi-465025221');
             },
           ),
           TextButton.icon(
@@ -261,12 +259,10 @@ Widget buildBottomSheet(BuildContext context) {
               foregroundColor: Colors.black,
               textStyle: Theme.of(context).textTheme.bodyLarge,
             ),
-            label: const Text('Give us Five Stars on PLay Store'),
+            label: Text(context.localizations!.playStore),
             icon: Image.asset('assets/play-store.png'),
             onPressed: () {
-              const url =
-                  'https://play.google.com/store/apps/details?id=com.medicine_reminder.medicine_reminder';
-              _launchURL(url);
+              _launchURL('https://play.google.com/store/apps/details?id=com.medicine_reminder.medicine_reminder');
             },
           ),
           TextButton.icon(
@@ -297,11 +293,9 @@ Widget buildBottomSheet(BuildContext context) {
   );
 }
 
-//url opener
 _launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not open the Url';
+  final Uri uri = Uri.parse(url);
+  if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+    throw 'Could not launch $url';
   }
 }
