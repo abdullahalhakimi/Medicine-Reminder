@@ -62,9 +62,9 @@ class _HomeState extends State<Home> {
               child: CustomCard(
                 icon: Image.asset(
                   'assets/cabinet.png',
-                  width: 80,
+                  width: 70,
                 ),
-                title: 'My Medicines',
+                title: context.localizations!.myMedicines,
               ),
             ),
             GestureDetector(
@@ -74,9 +74,9 @@ class _HomeState extends State<Home> {
               child: CustomCard(
                 icon: Image.asset(
                   'assets/calender.png',
-                  width: 80,
+                  width: 70,
                 ),
-                title: 'My Reminders',
+                title: context.localizations!.myReminders,
               ),
             ),
           ],
@@ -104,12 +104,14 @@ class _HomeState extends State<Home> {
                               return const Text('error');
                             }
                             if (!snapshot.hasData) {
-                              return const Center(
+                              return Center(
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 50),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 50),
                                   child: Text(
-                                    'No Reminders Today',
-                                    style: TextStyle(color: Colors.black54),
+                                    context.localizations!.noRemindersToday,
+                                    style:
+                                        const TextStyle(color: Colors.black54),
                                   ),
                                 ),
                               );
@@ -118,12 +120,14 @@ class _HomeState extends State<Home> {
                             final reminders = snapshot.requireData;
 
                             if (reminders.isEmpty) {
-                              return const Center(
+                              return Center(
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 50),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 50),
                                   child: Text(
-                                    'No Reminders Today',
-                                    style: TextStyle(color: Colors.black54),
+                                    context.localizations!.noRemindersToday,
+                                    style:
+                                        const TextStyle(color: Colors.black54),
                                   ),
                                 ),
                               );
@@ -248,10 +252,36 @@ Widget buildBottomSheet(BuildContext context) {
               foregroundColor: Colors.black,
               textStyle: Theme.of(context).textTheme.bodyLarge,
             ),
+            label: Text(
+              Localizations.localeOf(context).languageCode == 'en'
+                  ? 'Change Language To Arabic'
+                  : 'تغيير اللغة الى الانجليزية',
+            ),
+            icon: const Icon(
+              Icons.language,
+              color: Colors.blue,
+            ),
+            onPressed: () {
+              final currentLocale =
+                  Localizations.localeOf(context).languageCode;
+
+              final newLocale = currentLocale == 'en'
+                  ? const Locale('ar')
+                  : const Locale('en');
+
+              MyApp.of(context)?.setLocale(newLocale);
+            },
+          ),
+          TextButton.icon(
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.black,
+              textStyle: Theme.of(context).textTheme.bodyLarge,
+            ),
             label: Text(context.localizations!.linkedIn),
             icon: Image.asset('assets/linkedin.png'),
             onPressed: () {
-              _launchURL('https://www.linkedin.com/in/abdullah-al-hakimi-465025221');
+              _launchURL(
+                  'https://www.linkedin.com/in/abdullah-al-hakimi-465025221');
             },
           ),
           TextButton.icon(
@@ -262,29 +292,8 @@ Widget buildBottomSheet(BuildContext context) {
             label: Text(context.localizations!.playStore),
             icon: Image.asset('assets/play-store.png'),
             onPressed: () {
-              _launchURL('https://play.google.com/store/apps/details?id=com.medicine_reminder.medicine_reminder');
-            },
-          ),
-          TextButton.icon(
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.black,
-              textStyle: Theme.of(context).textTheme.bodyLarge,
-            ),
-            label: Text(
-              Localizations.localeOf(context).languageCode == 'en'
-                  ? 'Change Language To Arabic'
-                  : 'تغيير اللغة الى الانجليزية',
-            ),
-            icon: const Icon(Icons.language,color: Colors.blue,),
-            onPressed: () {
-              final currentLocale =
-                  Localizations.localeOf(context).languageCode;
-
-              final newLocale = currentLocale == 'en'
-                  ? const Locale('ar')
-                  : const Locale('en');
-
-              MyApp.of(context)?.setLocale(newLocale);
+              _launchURL(
+                  'https://play.google.com/store/apps/details?id=com.medicine_reminder.medicine_reminder');
             },
           ),
         ],

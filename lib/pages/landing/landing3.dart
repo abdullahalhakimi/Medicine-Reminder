@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medicine_reminder/extensions/context_extension.dart';
 import 'package:medicine_reminder/pages/landing/components/customImage.dart';
 import 'package:medicine_reminder/pages/landing/components/nextButton.dart';
 import 'package:medicine_reminder/pages/landing/components/textSection.dart';
@@ -24,8 +25,9 @@ class Landing3 extends StatelessWidget {
                   children: [
                     const CustomImage(imagePath: 'assets/landing3.png'),
                     SizedBox(height: deviceHeight * 0.05,),
-                    const TextSection('Medicine Cabinet',
-                        'Track your supply, dose, and measurements in a comprehensive health journal. '
+                    TextSection(
+                        'Medicine Cabinet',
+                        context.localizations!.landing3Description,
                     ),
                   ]
               ),

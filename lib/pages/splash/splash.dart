@@ -14,18 +14,32 @@ class Splash extends StatefulWidget {
 class SplashState extends State<Splash>  {
 
   // check if the user saw the tips or not
-  Future checkFirstSeen() async {
+  // Future checkFirstSeen() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   bool seen = (prefs.getBool('seen') ?? false);
+  //
+  //   if (seen) {
+  //     Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+  //   } else {
+  //     await prefs.setBool('seen', true);
+  //     Navigator.of(context).pushNamed('/landing1');
+  //
+  //   }
+  // }
+  Future<void> checkFirstSeen(BuildContext context) async {
+    final navigator = Navigator.of(context);
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool seen = (prefs.getBool('seen') ?? false);
 
     if (seen) {
-      Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+      navigator.pushNamedAndRemoveUntil('/home', (route) => false);
     } else {
       await prefs.setBool('seen', true);
-      Navigator.of(context).pushNamed('/landing1');
-
+      navigator.pushNamed('/landing1');
     }
   }
+
 
   @override
   void initState() {
@@ -33,7 +47,7 @@ class SplashState extends State<Splash>  {
     // Timer for the Splash Screen
     Timer(
       const Duration(seconds: 2),
-          () => checkFirstSeen(),
+          () => checkFirstSeen(context),
     );
 
   }

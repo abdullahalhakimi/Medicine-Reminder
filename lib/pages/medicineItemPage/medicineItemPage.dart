@@ -29,6 +29,7 @@ class _MedicineItemPageState extends State<MedicineItemPage> {
   //medicineItem.supplyCurrent
 
 
+  @override
   void initState() {
     super.initState();
     setState(() {
@@ -96,7 +97,7 @@ class _MedicineItemPageState extends State<MedicineItemPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('${medicineItem.name}', style: Theme.of(context).textTheme.headline6),
+                      Text(medicineItem.name, style: Theme.of(context).textTheme.titleLarge),
                       const SizedBox(height: 8,),
                       medicineItem.desc.isNotEmpty ? Column(
                         children: [
@@ -113,7 +114,7 @@ class _MedicineItemPageState extends State<MedicineItemPage> {
                         spacing: 5,
                         children: medicineItem.tags.map((tag) =>
                             Chip(
-                              label: Text('$tag', ),
+                              label: Text(tag, ),
                               backgroundColor: MyColors.lightBlue.withOpacity(0.5),
                               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             )
@@ -127,7 +128,7 @@ class _MedicineItemPageState extends State<MedicineItemPage> {
                   children: [
                     CustomCard(
                       title: 'Available',
-                      data: '${intSupplyCurrent} pills',
+                      data: '$intSupplyCurrent pills',
                       icon: const Icon(
                         Icons.assignment_turned_in,
                         color: MyColors.lightBlue,
@@ -136,7 +137,7 @@ class _MedicineItemPageState extends State<MedicineItemPage> {
                     ),
                     CustomCard(
                       title: 'Alert on',
-                      data: '${intSupplyMin} pills',
+                      data: '$intSupplyMin pills',
                       icon: const Icon(
                         Icons.assignment_late,
                         color: Color(0xffda4625),
@@ -149,7 +150,7 @@ class _MedicineItemPageState extends State<MedicineItemPage> {
                   children: [
                     CustomCard(
                       title: 'Dose',
-                      data: '${intDose} pills/dose',
+                      data: '$intDose pills/dose',
                       icon: const Icon(
                         Icons.timelapse,
                         color: MyColors.lightRed,
@@ -158,7 +159,7 @@ class _MedicineItemPageState extends State<MedicineItemPage> {
                     ),
                     CustomCard(
                       title: 'Strength',
-                      data: '${intCapSize} mg',
+                      data: '$intCapSize mg',
                       icon: const Icon(
                         Icons.hourglass_bottom,
                         color: Colors.purple,
@@ -178,64 +179,57 @@ class _MedicineItemPageState extends State<MedicineItemPage> {
   }
 
   Widget buildBottomSheet(BuildContext context) {
-      return Container(
-        child:
-        SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(MediaQuery. of(context). size. width / 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextButton.icon(
-                  style: TextButton.styleFrom(
-                    primary: Colors.black,
-                    textStyle: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  label: const Text('Take Dose'),
-                  icon: const Icon(Icons.timelapse,color: MyColors.lightGreen),
-                  onPressed: () {
-                    takeDose(context);
-                  },
+      return SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(MediaQuery. of(context). size. width / 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextButton.icon(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.black, textStyle: Theme.of(context).textTheme.bodyLarge,
                 ),
-                TextButton.icon(
-                  style: TextButton.styleFrom(
-                    primary: Colors.black,
-                    textStyle: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  label: const Text('Add Reminder'),
-                  icon: const Icon(Icons.notification_add,color: MyColors.lightGreen),
-                  onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/reminder_add', arguments: medicineItem);
-                  },
+                label: const Text('Take Dose'),
+                icon: const Icon(Icons.timelapse,color: MyColors.lightGreen),
+                onPressed: () {
+                  takeDose(context);
+                },
+              ),
+              TextButton.icon(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.black, textStyle: Theme.of(context).textTheme.bodyLarge,
                 ),
-                TextButton.icon(
-                  style: TextButton.styleFrom(
-                    primary: Colors.black,
-                    textStyle: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  label: const Text('Edit Medicine'),
-                  icon: const Icon(Icons.edit,color: MyColors.lightGreen),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/medicine_edit', arguments: medicineItem);
-                  },
+                label: const Text('Add Reminder'),
+                icon: const Icon(Icons.notification_add,color: MyColors.lightGreen),
+                onPressed: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/reminder_add', arguments: medicineItem);
+                },
+              ),
+              TextButton.icon(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.black, textStyle: Theme.of(context).textTheme.bodyLarge,
                 ),
-                TextButton.icon(
-                  style: TextButton.styleFrom(
-                    primary: Colors.black,
-                    textStyle: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  label: const Text('Delete Medicine'),
-                  icon: const Icon(Icons.delete,color: MyColors.lightGreen),
-                  onPressed: () {
-                    showDeleteDialog(context);
+                label: const Text('Edit Medicine'),
+                icon: const Icon(Icons.edit,color: MyColors.lightGreen),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/medicine_edit', arguments: medicineItem);
+                },
+              ),
+              TextButton.icon(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.black, textStyle: Theme.of(context).textTheme.bodyLarge,
+                ),
+                label: const Text('Delete Medicine'),
+                icon: const Icon(Icons.delete,color: MyColors.lightGreen),
+                onPressed: () {
+                  showDeleteDialog(context);
 
-                  },
-                ),
-              ],
-            ),
+                },
+              ),
+            ],
           ),
         ),
       );
@@ -272,10 +266,10 @@ class _MedicineItemPageState extends State<MedicineItemPage> {
 
   void onDeleteMedicine(BuildContext context) {
     widget.reminderDao.findReminderByMedicineId(medicineItem.id ?? 0).then((reminders) {
-      reminders.forEach((reminder) {
+      for (var reminder in reminders) {
         cancelNotification(reminder.id ?? 0);
         widget.reminderDao.deleteReminder(reminder);
-      });
+      }
       widget.medicineDao.deleteMedicine(medicineItem).then((value) => null);
       Navigator.popUntil(context, ModalRoute.withName('/cabinet'));
     });
