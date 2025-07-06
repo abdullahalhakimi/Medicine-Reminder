@@ -19,6 +19,7 @@ import 'package:medicine_reminder/pages/splash/splash.dart';
 import 'package:medicine_reminder/theme.dart';
 import 'package:medicine_reminder/util/notificationUtil.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     new FlutterLocalNotificationsPlugin();
@@ -83,6 +84,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         theme: defaultTheme,
         navigatorKey: navigatorKey,
         initialRoute: '/',

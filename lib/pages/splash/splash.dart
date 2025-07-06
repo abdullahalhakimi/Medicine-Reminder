@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:medicine_reminder/extensions/context_extension.dart';
 import 'package:medicine_reminder/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -80,8 +81,8 @@ class SplashState extends State<Splash>  {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Loading... ',
-                  style: TextStyle(
+                Text(context.localizations!.loading,
+                  style: const TextStyle(
                     color: MyColors.darkGreen,
                     fontWeight: FontWeight.w800,
                     fontSize: 24,
