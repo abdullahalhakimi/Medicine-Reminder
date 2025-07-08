@@ -1,5 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:flutter_native_timezone_updated_gradle/flutter_native_timezone.dart';
 import 'package:medicine_reminder/main.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -8,11 +8,11 @@ String currentTimezone = 'Unknown';
 
 initializeNotifications() async {
 
-  var android = new AndroidInitializationSettings('@drawable/ic_stat_drug');
-  var iOS = new IOSInitializationSettings();
+  var android = const AndroidInitializationSettings('@drawable/ic_stat_drug');
+  var iOS = const DarwinInitializationSettings();
 
-  var settings = new InitializationSettings(android: android, iOS: iOS);
-  flutterLocalNotificationsPlugin.initialize(settings, onSelectNotification: onSelectNotification);
+  var settings = InitializationSettings(android: android, iOS: iOS);
+  flutterLocalNotificationsPlugin.initialize(settings, onDidReceiveNotificationResponse: onSelectNotification);
   currentTimezone = await FlutterNativeTimezone.getLocalTimezone();
 }
 
@@ -25,7 +25,7 @@ Future singleNotification(
     String? payload,
     bool ongoing,
     String? sound) async {
-    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'PillPal',
         'PillPal',
         //'PillPal',
@@ -36,9 +36,9 @@ Future singleNotification(
         sound: RawResourceAndroidNotificationSound(sound),
     );
     var  iOSPlatformChannelSpecifics =
-    IOSNotificationDetails(sound: 'happy_tone.wav');
+    const DarwinNotificationDetails(sound: 'happy_tone.wav');
     var  macOSPlatformChannelSpecifics =
-    MacOSNotificationDetails(sound: 'happy_tone.wav');
+    const DarwinNotificationDetails(sound: 'happy_tone.wav');
     var  platformChannelSpecifics = NotificationDetails(
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics,
@@ -55,7 +55,7 @@ Future singleNotification(
 Future<void> singleNotificationCallback(int notificationId, String title, String subtext, DateTime dateTime, String? payload,
     {bool ongoing = true, String? sound = 'happy_tone'}) async {
   var tzDateTime = tz.TZDateTime.from(dateTime, tz.getLocation(await FlutterNativeTimezone.getLocalTimezone()),)
-  .add(Duration(seconds: 1));
+  .add(const Duration(seconds: 1));
   await singleNotification( notificationId , title, subtext,
   tzDateTime , payload, ongoing, sound).then((value) => null);
   //print('single $tzDateTime');
@@ -71,7 +71,7 @@ Future repeatingNotification(
     String? payload,
     String? sound) async {
 
-  var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
     'PillPal',
     'PillPal',
     //'PillPal',
@@ -83,9 +83,9 @@ Future repeatingNotification(
 
   );
   var  iOSPlatformChannelSpecifics =
-  IOSNotificationDetails(sound: 'happy_tone.wav');
+  const DarwinNotificationDetails(sound: 'happy_tone.wav');
   var  macOSPlatformChannelSpecifics =
-  MacOSNotificationDetails(sound: 'happy_tone.wav');
+  const DarwinNotificationDetails(sound: 'happy_tone.wav');
   var  platformChannelSpecifics = NotificationDetails(
     android: androidPlatformChannelSpecifics,
     iOS: iOSPlatformChannelSpecifics,
@@ -102,7 +102,7 @@ Future repeatingNotification(
 
 Future<void> repeatingNotificationCallback(int notificationId, String title, String subtext, DateTime dateTime, String? payload, {String? sound = 'happy_tone'}) async {
   var tzDateTime = tz.TZDateTime.from(dateTime, tz.getLocation(await FlutterNativeTimezone.getLocalTimezone()),)
-      .add(Duration(seconds: 1));
+      .add(const Duration(seconds: 1));
   await repeatingNotification( notificationId , title, subtext,
       tzDateTime , payload, sound).then((value) => null);
   //print('repeat $tzDateTime');
@@ -116,7 +116,7 @@ Future everydayNotification(
     String? payload,
     String? sound) async {
 
-  var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
     'PillPal',
     'PillPal',
     //'PillPal',
@@ -128,9 +128,9 @@ Future everydayNotification(
 
   );
   var  iOSPlatformChannelSpecifics =
-  IOSNotificationDetails(sound: 'happy_tone.wav');
+  const DarwinNotificationDetails(sound: 'happy_tone.wav');
   var  macOSPlatformChannelSpecifics =
-  MacOSNotificationDetails(sound: 'happy_tone.wav');
+  const DarwinNotificationDetails(sound: 'happy_tone.wav');
   var  platformChannelSpecifics = NotificationDetails(
     android: androidPlatformChannelSpecifics,
     iOS: iOSPlatformChannelSpecifics,
@@ -147,7 +147,7 @@ Future everydayNotification(
 
 Future<void> everydayNotificationCallback(int notificationId, String title, String subtext, DateTime dateTime, String? payload, {String? sound = 'happy_tone'}) async {
   var tzDateTime = tz.TZDateTime.from(dateTime, tz.getLocation(await FlutterNativeTimezone.getLocalTimezone()),)
-      .add(Duration(seconds: 1));
+      .add(const Duration(seconds: 1));
   await repeatingNotification( notificationId , title, subtext,
       tzDateTime , payload, sound).then((value) => null);
   //print('repeat $tzDateTime');
