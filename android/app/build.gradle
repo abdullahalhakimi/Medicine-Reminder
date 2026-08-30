@@ -26,7 +26,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.medicine_reminder.medicine_reminder"
-    compileSdkVersion 35
+    compileSdkVersion 36
     ndkVersion "25.1.8937393"
 
     compileOptions {
@@ -48,7 +48,7 @@ android {
     defaultConfig {
         applicationId "com.medicine_reminder.medicine_reminder"
         minSdkVersion 21
-        targetSdkVersion 35
+        targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
